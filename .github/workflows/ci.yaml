@@ -1,0 +1,220 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  install-dep:
+    name: Install and cache dependencies
+    strategy:
+      fail-fast: true
+      matrix:
+        node-version: [14.x]
+        os: [ubuntu-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+  format:
+    name: Format
+    strategy:
+      fail-fast: true
+      matrix:
+        node-version: [14.x]
+        os: [ubuntu-latest]
+
+    runs-on: ${{ matrix.os }}
+    needs:
+      - install-dep
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Format
+        run: yarn format
+
+    timeout-minutes: 5
+
+  lint:
+    name: Lint
+    strategy:
+      fail-fast: true
+      matrix:
+        node-version: [14.x]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    needs:
+      - install-dep
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Lint
+        run: yarn lint
+
+    timeout-minutes: 5
+
+  spellcheck:
+    name: Spellcheck
+    strategy:
+      fail-fast: true
+      matrix:
+        node-version: [14.x]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    needs:
+      - install-dep
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Lint
+        run: yarn spellcheck
+
+    timeout-minutes: 5
+
+  typecheck:
+    name: Typecheck
+    strategy:
+      fail-fast: true
+      matrix:
+        node-version: [14.x]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    needs:
+      - install-dep
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Typecheck
+        run: yarn typecheck
+
+    timeout-minutes: 5
+
+  test:
+    name: Test
+    strategy:
+      matrix:
+        node-version: [14.x]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+
+    needs:
+      - typecheck
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Test
+        run: yarn test
+
+  test-e2e:
+    name: E2E-Test
+    strategy:
+      matrix:
+        node-version: [14.x]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+
+    needs:
+      - typecheck
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Test
+        run: yarn test:e2e

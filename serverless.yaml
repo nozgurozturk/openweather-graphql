@@ -1,0 +1,36 @@
+service: openweather-graphql-api
+frameworkVersion: '3'
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: prod
+  region: eu-central-1
+  timeout: 15
+  tracing:
+    lambda: true
+
+functions:
+  forecast:
+    name: ${sls:stage}-forecast
+    handler: functions/forecast.handler
+    events:
+      - http:
+          path: graphql
+          method: post
+      - http:
+          path: graphql
+          method: get
+
+custom:
+  serverless-offline:
+    httpPort: 4000
+
+  webpack:
+    webpackConfig: 'webpack.config.js'
+    packager: 'yarn'
+    includeModules: true

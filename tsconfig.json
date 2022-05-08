@@ -1,0 +1,28 @@
+{
+	"compilerOptions": {
+		"lib": ["es2020"],
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"skipLibCheck": true,
+		"declaration": true,
+		"removeComments": true,
+		"emitDecoratorMetadata": true,
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"allowSyntheticDefaultImports": true,
+		"target": "es2020",
+		"sourceMap": true,
+		"outDir": "dist",
+		"incremental": true,
+		"strict": true,
+		"resolveJsonModule": true,
+		"isolatedModules": false,
+		"strictPropertyInitialization": false,
+		"typeRoots": ["@types", "node_modules/@types"]
+	},
+	"include": ["src/**/*", "test/**/*", "functions/**/*", "@types"],
+	"exclude": ["node_modules"],
+	"ts-node": {
+		"swc": true
+	}
+}

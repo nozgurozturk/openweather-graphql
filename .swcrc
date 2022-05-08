@@ -1,0 +1,38 @@
+{
+	"exclude": [
+		".*.js$",
+		".*.map$",
+		"node_modules",
+		"dist",
+		"functions",
+		"test",
+		"@types",
+		".*.(spec|test).+(ts|tsx|js)"
+	],
+	"jsc": {
+		"parser": {
+			"syntax": "typescript",
+			"tsx": false,
+			"decorators": true,
+			"dynamicImport": true
+		},
+		"transform": {
+			"legacyDecorator": true,
+			"decoratorMetadata": true
+		},
+		"target": "es2020",
+		"keepClassNames": true,
+		"minify": {
+			"mangle": true,
+			"compress": true
+		}
+	},
+	"module": {
+		"type": "commonjs",
+		"strict": true,
+		"strictMode": true,
+		"noInterop": false
+	},
+	"minify": true,
+	"sourceMaps": false
+}
