@@ -1,9 +1,9 @@
 {
-  "name": "ts-graphql",
+  "name": "openweather-graphql",
   "version": "1.0.0",
-  "description": "graphql app",
+  "description": "OpenWeather GraphQL API",
   "main": "./dist/index.js",
-  "repository": "https://github.com/nozgurozturk/ts-graphql.git",
+  "repository": "https://github.com/nozgurozturk/openweather-graphql.git",
   "author": "Ozgur Ozturk <ozgur@nozgurozturk.com>",
   "license": "UNLICENSED",
   "scripts": {
