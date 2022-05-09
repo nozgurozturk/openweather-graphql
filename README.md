@@ -147,7 +147,7 @@ in [.serverless.yml](.serverless.yml)
 ---
 
 You can access the project via
-[https://293j0vuo3a.execute-api.eu-central-1.amazonaws.com/prod/graphql](https://293j0vuo3a.execute-api.eu-central-1.amazonaws.com/prod/graphql)
+[https://r3cnnlt4vg.execute-api.eu-central-1.amazonaws.com/prod/graphql](https://r3cnnlt4vg.execute-api.eu-central-1.amazonaws.com/prod/graphql)
 
 ---
 
