@@ -1,0 +1,126 @@
+{
+	"uuid": "a64b040c-e93a-46b6-a636-b619cf503389",
+	"lastMigration": 19,
+	"name": "OpenWeatherAPI",
+	"endpointPrefix": "",
+	"latency": 0,
+	"port": 3001,
+	"hostname": "0.0.0.0",
+	"routes": [
+		{
+			"uuid": "742a956f-7b3c-4c8d-9e2a-bd58ec45bf3f",
+			"documentation": "",
+			"method": "get",
+			"endpoint": "data/2.5/onecall",
+			"responses": [
+				{
+					"uuid": "52f50ff9-5fe6-4d20-81f8-50a2c1e3f616",
+					"body": "{\n    \n}",
+					"latency": 0,
+					"statusCode": 200,
+					"label": "",
+					"headers": [],
+					"filePath": "./test/mocks/openweather/onecall/{{#switch (queryParam 'lat')}}{{#case '52.3727598'}}amsterdam{{/case}}{{#case '52.5170365'}}berlin{{/case}}{{#default}}{{/default}}{{/switch}}.{{queryParam 'units'}}.json",
+					"sendFileAsBody": true,
+					"rules": [
+						{
+							"target": "query",
+							"modifier": "lan",
+							"value": "[+-]?(?=\\.\\d|\\d)(?:\\d+)?(?:\\.?\\d*)(?:[eE][+-]?\\d+)?",
+							"operator": "regex"
+						},
+						{
+							"target": "query",
+							"modifier": "lat",
+							"value": "[+-]?(?=\\.\\d|\\d)(?:\\d+)?(?:\\.?\\d*)(?:[eE][+-]?\\d+)?",
+							"operator": "regex"
+						}
+					],
+					"rulesOperator": "OR",
+					"disableTemplating": false,
+					"fallbackTo404": false
+				},
+				{
+					"uuid": "9bda1c11-3528-4c5c-802d-26592c43e6a7",
+					"body": "{\ncod: \"404\",\nmessage: \"Internal error\"\n}",
+					"latency": 0,
+					"statusCode": 400,
+					"label": "",
+					"headers": [],
+					"filePath": "",
+					"sendFileAsBody": false,
+					"rules": [],
+					"rulesOperator": "OR",
+					"disableTemplating": false,
+					"fallbackTo404": false
+				}
+			],
+			"enabled": true,
+			"randomResponse": false,
+			"sequentialResponse": false
+		},
+		{
+			"uuid": "2229e294-75af-438d-b8cc-68d80a801e5a",
+			"documentation": "",
+			"method": "get",
+			"endpoint": "geo/1.0/direct",
+			"responses": [
+				{
+					"uuid": "817aee40-eaa6-4884-8c1c-1e18d14a4bb7",
+					"body": "",
+					"latency": 0,
+					"statusCode": 200,
+					"label": "",
+					"headers": [],
+					"filePath": "./test/mocks/openweather/geo/{{queryParam 'q'}}.json",
+					"sendFileAsBody": true,
+					"rules": [
+						{
+							"target": "body",
+							"modifier": "",
+							"value": "",
+							"operator": "equals"
+						}
+					],
+					"rulesOperator": "OR",
+					"disableTemplating": false,
+					"fallbackTo404": false
+				}
+			],
+			"enabled": true,
+			"randomResponse": false,
+			"sequentialResponse": false
+		}
+	],
+	"proxyMode": false,
+	"proxyHost": "https://api.openweathermap.org/",
+	"proxyRemovePrefix": false,
+	"tlsOptions": {
+		"enabled": false,
+		"type": "CERT",
+		"pfxPath": "",
+		"certPath": "",
+		"keyPath": "",
+		"caPath": "",
+		"passphrase": ""
+	},
+	"cors": true,
+	"headers": [
+		{
+			"key": "Content-Type",
+			"value": "application/json"
+		}
+	],
+	"proxyReqHeaders": [
+		{
+			"key": "",
+			"value": ""
+		}
+	],
+	"proxyResHeaders": [
+		{
+			"key": "",
+			"value": ""
+		}
+	]
+}

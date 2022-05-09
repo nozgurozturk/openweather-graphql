@@ -5,6 +5,13 @@ on:
     branches:
       - '*'
 
+env:
+  SERVER_PORT: 3000
+  GRAPHQL_SCHEMA_DIR: ./api/graphql
+  WEATHER_API_KEY: super-secret-key
+  WEATHER_FORECAST_API_URL: http://localhost:3001/data/2.5/onecall
+  WEATHER_LOCATION_API_URL: http://localhost:3001/geo/1.0/direct
+
 jobs:
   install-dep:
     name: Install and cache dependencies
@@ -215,6 +222,15 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+
+      - name: Build Mock OpenWeatherAPI Docker image
+        run:
+          docker build -t openweather-api-mock -f
+          ./docker/Dockerfile.openweather ./
+
+      - name: Run Mock OpenWeatherAPI Docker image
+        run:
+          docker run -d --name openweather-api -p 3001:3001 openweather-api-mock
 
       - name: Test
         run: yarn test:e2e

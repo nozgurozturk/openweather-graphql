@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - main
+env:
+  SERVER_PORT: 3000
+  GRAPHQL_SCHEMA_DIR: ./api/graphql
+  WEATHER_API_KEY: super-secret-key
+  WEATHER_FORECAST_API_URL: http://localhost:3001/data/2.5/onecall
+  WEATHER_LOCATION_API_URL: http://localhost:3001/geo/1.0/direct
 
 jobs:
   deploy:
