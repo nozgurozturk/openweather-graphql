@@ -43,7 +43,7 @@ class GraphQLClient {
 		};
 
 		const response = await request(this.path)
-			.post(this.path)
+			.post('/')
 			.set('Accept', 'application/json')
 			.send(params);
 

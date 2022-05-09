@@ -5,6 +5,7 @@ async function globalTearDown(
 	projectConfig: Config.ProjectConfig,
 ) {
 	console.log('Tearing down...');
+	global.__TEST_SERVER__?.close();
 }
 
 export = globalTearDown;
