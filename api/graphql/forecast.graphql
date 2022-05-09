@@ -1,0 +1,76 @@
+scalar DateTime
+
+schema {
+	query: Query
+}
+
+type Query {
+	forecast(
+		location: String!
+		interval: ForecastInterval
+		units: ForecastUnits
+	): ForecastResult
+}
+
+enum ForecastInterval {
+	CURRENT
+	DAILY
+	HOURLY
+}
+
+enum ForecastUnits {
+	METRIC
+	IMPERIAL
+}
+
+type Weather {
+	name: String!
+	description: String!
+}
+
+type Planetary {
+	sunrise: DateTime
+	sunset: DateTime
+}
+
+type Wind {
+	speed: Float!
+	degree: Float!
+	gust: Float
+}
+
+type TemperatureDaily {
+	day: Float!
+	min: Float!
+	max: Float!
+	night: Float!
+	evening: Float!
+	morning: Float!
+}
+
+type TemperatureHourly {
+	feelsLike: Float!
+	current: Float!
+}
+
+union Temperature = TemperatureDaily | TemperatureHourly
+
+type Location {
+	city: String!
+	lat: Float!
+	lon: Float!
+}
+
+type Forecast {
+	date: DateTime!
+	weather: Weather!
+	planetary: Planetary!
+	wind: Wind!
+	temperature: Temperature!
+}
+
+type ForecastResult {
+	location: Location!
+	forecasts: [Forecast!]!
+	units: ForecastUnits!
+}
