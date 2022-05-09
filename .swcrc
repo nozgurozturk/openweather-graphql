@@ -1,13 +1,5 @@
 {
-	"exclude": [
-		".*.js$",
-		".*.map$",
-		"node_modules",
-		"dist",
-		"test",
-		"@types",
-		".*.(spec|test).+(ts|tsx|js)"
-	],
+	"exclude": [".*.js$", ".*.map$", "node_modules", "dist"],
 	"jsc": {
 		"parser": {
 			"syntax": "typescript",

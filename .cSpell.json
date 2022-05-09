@@ -1,5 +1,12 @@
 {
 	"version": "0.2",
 	"language": "en",
-	"words": ["openweather", "typecheck"]
+	"words": [
+		"openweather",
+		"typecheck",
+		"mockoon",
+		"openweathermap",
+		"pino",
+		"Typedefs"
+	]
 }
